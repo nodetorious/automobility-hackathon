@@ -43,7 +43,7 @@ class MerchantOfferService {
                 'Accept': 'application/json',
                 'Authorization': 'Basic ' + new Buffer(userId + ':' + password).toString('base64')
             },
-            body: JSON.stringify(body),
+            // body: JSON.stringify(body),
 
         }, (error, response, body) => {
             onSuccess(body)

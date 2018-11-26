@@ -2,6 +2,7 @@ const router = require('express').Router()
 const hackersRoutes = require('./hackers.routes')
 const visaRoutes = require('./visa.routes')
 const clientRoutes = require('./client.routes')
+const offerRoutes = require('./offers.routes')
 const authenticate = require('../filters/authenticate')
 
 module.exports = router
@@ -13,16 +14,13 @@ router.use(authenticate)
 router.use('/api/hackers', hackersRoutes)
 // router.use('/api/entities', entitiesRoutes)
 // router.use('/api/examples', examplesRoutes)
-router.use('/api/visa', visaRoutes);
-
-
-
+router.use('/api/visa', visaRoutes)
+router.use('/api/offer', offerRoutes)
 // API error handlers (API routes must be registered before this)
 useAPIErrorHandlers(router)
 
 // register client routes
 router.use(clientRoutes)
-
 
 function useAPIErrorHandlers(router) {
     // Handle API 404
