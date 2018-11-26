@@ -173,6 +173,9 @@ class SerachPage extends React.Component {
     onSearchClickError = error => {
         console.log(error)
     }
+    onPush = evt => {
+        this.props.history.push("/page2")
+    }
     render() {
         return (
             <React.Fragment>
@@ -189,7 +192,7 @@ class SerachPage extends React.Component {
                         </div>
                     </div>
                 </div> */}
-                <div>
+                <div style={{ backgroundImage: `url(https://wallpapercave.com/wp/HKBJSDe.jpg)`, height: "100vh" }}>
                     <div>
                         {/* <small className="text-dark" style={{ fontSize: 20 }}><span className="ion-md-pin"></span><strong>City:Los Angeles  latitude:{(this.state.currentPosition.lat).toFixed(2)}   longitude:{(this.state.currentPosition.lng).toFixed(2)}</strong></small> */}
                     </div>
@@ -211,7 +214,7 @@ class SerachPage extends React.Component {
                                     <button className='form-control' style={{ height: "9vh", backgroundColor: "rgba(0,0,0,0.7)", color: "white", fontSize: 20 }} onClick={() => { this.onSearchClick(this.state.data) }}><strong>go!</strong></button>
                                 </div>
                             </div>
-                            <div className="align-items-center" style={{ background: "rgba(255,255,255,0.7)", display: this.state.show, fontSize: 25, height: "13vh" }}>
+                            <div className="align-items-center" style={{ background: "rgba(255,255,255,0.7)", display: this.state.show, fontSize: 25, height: "13vh" }} onClick={this.onPush}>
                                 {this.state.results.address ? (this.state.results.address.visaStoreName + " " + this.state.results.address.merchantStreetAddress + " " + this.state.results.address.merchantState) : null}
                             </div>
                             <div className="align-items-end" style={{ position: "absolute", bottom: 0, width: "100%" }}>
@@ -223,7 +226,6 @@ class SerachPage extends React.Component {
                                     onKeyPress={button => this.onKeyPress(button)}
                                 />
                             </div>
-
                         </div>
                         <div className="col-sm-4" style={{ fontSize: 30 }}>
                             <li className="list-group-item" style={{ backgroundColor: 'rgba(255,255,255,0.5)' }}>
@@ -252,7 +254,7 @@ class SerachPage extends React.Component {
                                     <a className="d-block text-light text-large font-weight-light" onClick={() => { }}>&times;</a>
                                 </div>
                             </li>
-                            <li className="list-group-item" style={{ backgroundColor: 'rgba(255,255,255,0.5)' }}>
+                            <li className="list-group-item" style={{ backgroundColor: 'rgba(255,255,255,0.5)' }} onClick={this.onPush}>
                                 <div className="media align-items-center">
                                     <img src="http://blogs-images.forbes.com/elainewong/files/2011/01/0106_starbucks-logo_400x400.jpg"
                                         style={{ width: 30, height: 30 }}

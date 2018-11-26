@@ -5,13 +5,13 @@ const fs = require('fs');
 const path = require('path');
 require('dotenv').config();
 
+const keyFile = path.join(__dirname, '..', '..', 'secrets', 'key_8f8104b5-b24a-4007-9f88-a0797d1d8ce7.pem');
+const certificateFile = path.join(__dirname, '..', '..', 'secrets', 'cert.pem');
+const userId = process.env.VISA_USERID;
+const password = process.env.VISA_PASSWORD;
+
 class VisaService {
   static merchantSearch(body, onSuccess) {
-    const keyFile = path.join(__dirname, '..', '..', 'secrets', 'key_8f8104b5-b24a-4007-9f88-a0797d1d8ce7.pem');
-    const certificateFile = path.join(__dirname, '..', '..', 'secrets', 'cert.pem');
-    const userId = process.env.VISA_USERID;
-    const password = process.env.VISA_PASSWORD;
-
     return req.post({
       uri: 'https://sandbox.api.visa.com/merchantsearch/v1/search',
       key: fs.readFileSync(keyFile),
@@ -28,11 +28,6 @@ class VisaService {
   }
 
   static merchantLocator(body, onSuccess) {
-    const keyFile = path.join(__dirname, '..', '..', 'secrets', 'key_8f8104b5-b24a-4007-9f88-a0797d1d8ce7.pem');
-    const certificateFile = path.join(__dirname, '..', '..', 'secrets', 'cert.pem');
-    const userId = process.env.VISA_USERID;
-    const password = process.env.VISA_PASSWORD;
-
     return req.post({
       uri: 'https://sandbox.api.visa.com/merchantlocator/v1/locator',
       key: fs.readFileSync(keyFile),
