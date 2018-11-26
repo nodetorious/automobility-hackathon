@@ -1,8 +1,10 @@
 import React, { Component } from "react";
+import { withRouter } from 'react-router-dom';
 // import MyFancyComponent from './component/map/Map'
-import styles from "./App.module.css";
-import SerachPage from './component/SerachPage'
-import MyFancyComponent from './component/map/mapDirections'
+// import SerachPage from './component/SerachPage'
+// import MyFancyComponent from './component/map/mapDirections'
+import Navigation from './component/Navigation';
+// import Page2 from './component/page2/Page2';
 
 const gm = window.gm;
 
@@ -81,16 +83,25 @@ class App extends Component {
   render() {
 
     console.log(gm)
+    console.log(this.props.location);
     return (
-      <React.Fragment>
-        <div className={styles.root} style={{ backgroundImage: `url(https://wallpapercave.com/wp/HKBJSDe.jpg)`, height: "100vh" }}>
-          <div><small>latitude:{this.state.lat} longitude:{this.state.lng}</small></div>
-          <SerachPage />
-        </div>
-        <MyFancyComponent />
-      </React.Fragment>
+      // <div className={styles.root} style={{ backgroundImage: `url(https://wallpapercave.com/wp/HKBJSDe.jpg)`, height: "100vh" }}>
+      <>
+        <div><small>latitude:{this.state.lat} longitude:{this.state.lng}</small></div>
+        <Navigation />
+      </>
+      // </div>
+
+      // {/* <h1 onClick={() => this.props.history.push('/page2')}>Click me if you dare</h1> */ }
+      // <React.Fragment>
+      //   <div className={styles.root} style={{ backgroundImage: `url(https://wallpapercave.com/wp/HKBJSDe.jpg)`, height: "100vh" }}>
+      //     <div><small>latitude:{this.state.lat} longitude:{this.state.lng}</small></div>
+      //     <SerachPage />
+      //   </div>
+      //   <MyFancyComponent />
+      // </React.Fragment>
     );
   }
 }
 
-export default App;
+export default withRouter(App);
