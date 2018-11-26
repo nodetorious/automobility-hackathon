@@ -1,4 +1,3 @@
-// const axios = require('axios');
 const https = require('https');
 const request = require('request');
 const req = request.defaults();
@@ -69,47 +68,20 @@ class VisaService {
       onSuccess(body);
     });
 
+    return req.post({
+      uri: 'https://sandbox.api.visa.com/merchantlocator/v1/locator',
+      key: fs.readFileSync(keyFile),
+      cert: fs.readFileSync(certificateFile),
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': 'Basic ' + new Buffer(userId + ':' + password).toString('base64')
+      },
+      body: JSON.stringify(body),
+    }, (error, response, body) => {
+      onSuccess(body);
+    });
   }
 }
 
 module.exports = VisaService;
-
-
-
-// const instance = axios.create({
-//   baseURL: 'https://baseurl.com',
-//   httpsAgent: new https.Agent({
-//       ca: fs.readFileSync(`${path}CA.pem`),
-//       cert: fs.readFileSync(`${path}CERT.pem`),
-//       key: fs.readFileSync(`${path}KEY.pem`),
-//       auth: 'user:password',
-//       rejectUnauthorized: false
-//   })
-// });
-
-// instance.get('/accounts')
-// .then(_ => console.log(`response: ${_}`))
-// .catch(err => console.log(`error: ${err.stack}`));
-
-
-
-
-// var request = require('request');
-// var req = request.defaults();
-// var fs = require('fs');
-
-// req.post({
-//     uri : "https://sandbox.api.visa.com/…",
-//     key: fs.readFileSync(keyFile),
-//     cert: fs.readFileSync(certificateFile),
-//     ca: fs.readFileSync(caFile)
-//     headers: {
-//       'Content-Type' : 'application/json',
-//       'Accept' : 'application/json',
-//       'Authorization' : 'Basic ' + new Buffer(userId + ':' + password).toString('base64')
-//     },
-//     body: data
-//   }, function(error, response, body) {
-//     …
-//   }
-// );

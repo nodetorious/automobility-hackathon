@@ -58,16 +58,16 @@ class SerachPage extends React.Component {
         console.log(window)
         var id = gm.info.getCurrentPosition(this.processPosition, true)
         console.log(id)
-        var connected = gm.networkManager.getNetworkAvailability();
+        // var connected = gm.networkManager.getNetworkAvailability();
 
-        gm.networkManager.getNetworkAvailability(this.networkManager)
+        // gm.networkManager.getNetworkAvailability(this.networkManager)
     }
 
-    networkManager = (connected) => {
-        if (connected) {
-            console.log("connected")
-        }
-    }
+    // networkManager = (connected) => {
+    //     if (connected) {
+    //         console.log("connected")
+    //     }
+    // }
     processPosition = (position) => {
         console.log("this is the position", position)
         var lat = position.coords.latitude;
