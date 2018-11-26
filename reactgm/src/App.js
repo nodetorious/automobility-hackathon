@@ -3,6 +3,9 @@ import React, { Component } from "react";
 import styles from "./App.module.css";
 import SerachPage from './component/SerachPage'
 import MyFancyComponent from './component/map/mapDirections'
+import Page2 from './component/page2/Page2'
+import VisaServices from './services/VisaServices'
+
 
 const gm = window.gm;
 
@@ -28,8 +31,15 @@ class App extends Component {
       altitude: position.coords.heading
     })
   }
+  onSuccess = evt => {
+    console.log('successful get all offers', evt)
+  }
+  onError = evt => {
+    console.log('this was a failed get all offers', evt)
+  }
 
   componentDidMount() {
+    VisaServices.GetAllOffers(this.onSuccess, this.onError);
     const vin = gm.info.getVIN();
     this.setState({ vin });
     var destination = {
@@ -85,9 +95,10 @@ class App extends Component {
       <React.Fragment>
         <div className={styles.root} style={{ backgroundImage: `url(https://wallpapercave.com/wp/HKBJSDe.jpg)`, height: "100vh" }}>
           <div><small>latitude:{this.state.lat} longitude:{this.state.lng}</small></div>
-          <SerachPage />
+          {/* <SerachPage /> */}
+          <Page2 />
         </div>
-        <MyFancyComponent />
+        {/* <MyFancyComponent /> */}
       </React.Fragment>
     );
   }

@@ -15,7 +15,7 @@ const Page2 = props => {
                     <th>Total Time</th>
                     <th></th>
                 </tr>
-                <tr onClick={props.handleClose}>
+                <tr onClick={props.handleClose} style={{ backgroundColor: 'gold' }}>
                     <td></td>
                     <td>Starbucks</td>
                     <td>0.9 Mile</td>

@@ -36,6 +36,17 @@ class VisaServices {
             .catch(onError)
     }
 
+    static GetAllOffers(onSuccess, onError) {
+        console.log('**********************************************************')
+        const url = 'http://localhost:8080/api/visa/getAllOffers'
+        const config = {
+            method: 'GET',
+        }
+        axios(url, config)
+            .then(onSuccess)
+            .catch(onError)
+    }
+
     // static getAddressById(id,onSuccess,onError){
     //     const url=`/node-api/server.js/api/address/${id}`
     //     const config={
