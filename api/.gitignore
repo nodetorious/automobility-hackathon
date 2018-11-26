@@ -60,3 +60,5 @@ package-lock.json
 
 # OS Files
 .DS_Store
+
+secrets
