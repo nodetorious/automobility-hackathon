@@ -8,6 +8,7 @@ module.exports = router
 
 // api routes ===========================================================
 router.post('/merchantsearch', visaController.merchantSearch);
+router.post('/merchantlocator', visaController.merchantLocator);
 
 
 
