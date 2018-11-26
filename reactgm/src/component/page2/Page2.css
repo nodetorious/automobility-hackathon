@@ -24,17 +24,23 @@ table {
     padding: 0;
     background: "transparent";
     border: "none";
-    cursor: "pointer";
     width: "100%"}
 
 td, th {
     border: 1px solid #949494;
-    text-align: left;
+    text-align: center;
     padding: 8px;
 }
 
+tr {
+    cursor: "pointer";
+}
+
 th:nth-child(2){
-    width: 60%;
+    width: 35%
+}
+td:nth-child(2){
+    text-align: left;
 }
 
 tr:nth-child(even) {

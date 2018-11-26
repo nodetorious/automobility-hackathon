@@ -34,8 +34,11 @@ class Page2 extends Component {
 
     handleClose = () => {
         gm.system.closeApp();
-
     };
+
+    hi = () => {
+        console.log('hi')
+    }
 
     render() {
         return (
