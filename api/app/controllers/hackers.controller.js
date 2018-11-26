@@ -1,6 +1,6 @@
-const responses = require('../models/responses');
+const responses = require('../models/responses')
 const hackersService = require('../services/hackers.service')
-const apiPrefix = '/api/hackers';
+const apiPrefix = '/api/hackers'
 
 module.exports = {
     readAll: readAll,
@@ -20,7 +20,7 @@ function readAll(req, res) {
         .catch(err => {
             console.log(err)
             res.status(500).send(new responses.ErrorResponse(err))
-        });
+        })
 }
 
 function readById(req, res) {
