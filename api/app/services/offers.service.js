@@ -29,6 +29,7 @@ class MerchantOfferService {
     }
 
     static getAllOffers(onSuccess) {
+        console.log('*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^*^**^*^*^*^*^*^*^*^*^*^*^')
         const keyFile = path.join(__dirname, '..', '..', 'secrets', 'key_8f8104b5-b24a-4007-9f88-a0797d1d8ce7.pem');
         const certificateFile = path.join(__dirname, '..', '..', 'secrets', 'cert.pem');
         const userId = process.env.VISA_USERID;
