@@ -1,0 +1,42 @@
+html{
+    background-color: black;
+}
+
+.root{
+    background-color: black;
+}
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    margin-top: 100px;
+    font-size: 1.5em;
+    color: white;
+    background-color: black;
+    width: 100%;
+}
+
+.btn {
+    background-color: black;
+}
+
+.hiddenbtn {
+    padding: 0;
+    background: "transparent";
+    border: "none";
+    cursor: "pointer";
+    width: "100%"}
+
+td, th {
+    border: 1px solid #949494;
+    text-align: left;
+    padding: 8px;
+}
+
+th:nth-child(2){
+    width: 60%;
+}
+
+tr:nth-child(even) {
+    background-color: #424242;
+}
