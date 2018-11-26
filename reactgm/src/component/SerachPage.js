@@ -12,6 +12,7 @@ class SerachPage extends React.Component {
                 lat: 0,
                 lng: 0
             },
+            show: "none",
             input: '',
             layoutName: "default",
             data: {
@@ -54,13 +55,29 @@ class SerachPage extends React.Component {
             superQueue: 0,
             chipotleQueue: 0,
             results: {
-                address: []
+                address: {}
             }
         }
     }
     onChange = evt => {
         const key = evt.target.name
         const val = evt.target.value
+        const type = evt.target.type
+        // if (type === "object") {
+        //     this.setState({
+        //         ...this.state,
+        //         data: {
+        //             ...this.state.data,
+        //             searchAttrList: {
+        //                 ...this.state.data.searchAttrList,
+        //                 merchantName: val
+        //             }
+        //         }
+        //     }, () => {
+        //         console.log(this.state.data)
+        //     })
+        // }
+        // else
         this.setState({
             [key]: val
         })
@@ -94,7 +111,12 @@ class SerachPage extends React.Component {
     }
 
     onQueueInsightsSuccess = response => {
-        console.log("======================", response)
+        console.log(response.data.responseData.merchantList)
+        const arr = response.data.responseData.merchantList
+        this.setState({
+            chipotleQueue: arr[0].waitTime,
+            superQueue: arr[1].waitTime
+        })
     }
     onQueueInsightsError = error => {
         console.log(error)
@@ -114,7 +136,15 @@ class SerachPage extends React.Component {
 
     onChangeInput = input => {
         this.setState({
-            input: input
+            input: input,
+            ...this.state,
+            data: {
+                ...this.state.data,
+                searchAttrList: {
+                    ...this.state.data.searchAttrList,
+                    merchantName: input
+                }
+            }
         });
         console.log("Input changed", input);
     };
@@ -129,18 +159,13 @@ class SerachPage extends React.Component {
         VisaServices.MerchantSearch(data, this.onSearchClickSuccess, this.onSearchClickError)
     }
     onSearchClickSuccess = response => {
-        console.log(response.data.merchantSearchServiceResponse.response)
+        console.log("===========here===========", response.data.response[0].responseValues)
+        const obj = response.data.response[0].responseValues
         this.setState({
             ...this.state,
+            show: this.state.show === "none" ? "block" : "none",
             results: {
-                address: [
-                    "1251 S Grand Ave, Los Angeles, CA 90015",
-                    "800 W Olympic Blvd #102, Los Angeles, CA 90015",
-                    "1111 S Grand Ave, Los Angeles, CA 90015",
-                    "600 W 9th St, Los Angeles, CA 90015",
-                    "600 W 9th St, Los Angeles, CA 90015",
-                    "400 W Olympic Blvd, Los Angeles, CA 90015"
-                ]
+                address: obj
             }
         })
     }
@@ -166,7 +191,7 @@ class SerachPage extends React.Component {
                 </div> */}
                 <div>
                     <div>
-                        {/* <small>latitude:{this.state.currentPosition.lat} longitude:{this.state.currentPosition.lng}</small> */}
+                        {/* <small className="text-dark" style={{ fontSize: 20 }}><span className="ion-md-pin"></span><strong>City:Los Angeles  latitude:{(this.state.currentPosition.lat).toFixed(2)}   longitude:{(this.state.currentPosition.lng).toFixed(2)}</strong></small> */}
                     </div>
                     <div className="row">
                         <div className="col-sm-8 text-dark mt-2" style={{ fontSize: 20 }}>
@@ -177,21 +202,19 @@ class SerachPage extends React.Component {
                                         name='serach'
                                         type='text'
                                         style={this.inputStyle}
-                                        value={this.state.input}
+                                        value={this.state.data.searchAttrList.merchantName}
                                         placeholder='Search...'
-                                        onChange={this.onChange}
+                                    // onChange={this.onChangeInput}
                                     />
                                 </div>
                                 <div className="form-group col-sm-2">
-                                    <button className='form-control' style={{ height: "9vh", backgroundColor: "rgba(0,0,0,0.7)", color: "white", fontSize: 25 }} onClick={() => { this.onSearchClick(this.state.data) }}><strong>go!</strong></button>
+                                    <button className='form-control' style={{ height: "9vh", backgroundColor: "rgba(0,0,0,0.7)", color: "white", fontSize: 20 }} onClick={() => { this.onSearchClick(this.state.data) }}><strong>go!</strong></button>
                                 </div>
                             </div>
-                            <div>
-                                {this.state.results.address && this.state.results.address.map((add, idx) => {
-                                    return (<p key={idx} style={{ zIndex: 1 }}>{add}</p>)
-                                })}
+                            <div className="align-items-center" style={{ background: "rgba(255,255,255,0.7)", display: this.state.show, fontSize: 25, height: "13vh" }}>
+                                {this.state.results.address ? (this.state.results.address.visaStoreName + " " + this.state.results.address.merchantStreetAddress + " " + this.state.results.address.merchantState) : null}
                             </div>
-                            <div className="align-items-flex-end" style={{ position: "relative", top: 320 }}>
+                            <div className="align-items-end" style={{ position: "absolute", bottom: 0, width: "100%" }}>
                                 <Keyboard
                                     style={{ fontSize: 20 }}
                                     ref={r => (this.keyboard = r)}
@@ -203,6 +226,32 @@ class SerachPage extends React.Component {
 
                         </div>
                         <div className="col-sm-4" style={{ fontSize: 30 }}>
+                            <li className="list-group-item" style={{ backgroundColor: 'rgba(255,255,255,0.5)' }}>
+                                <div className="media align-items-center">
+                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlMU2wosyQ1wKFKWJQOIbd089wjN_n46ypcaCtRfzZrbI4YKeL"
+                                        style={{ width: 30, height: 30 }}
+                                        className="d-block rounded-circle" alt=""
+                                        onClick={() => { }} />
+                                    <div className="media-body px-2">
+                                        <a className="text-dark mr-2"><strong>Super Duper Buger</strong></a>
+                                        <span className={"badge badge-dot badge-success"}></span>&nbsp;<span className="text-danger" style={{ fontSize: 20 }}>Queue Time:{this.state.superQueue && Math.floor(this.state.superQueue / 60)}</span>
+                                    </div>
+                                    <a className="d-block text-light text-large font-weight-light" onClick={() => { }}>&times;</a>
+                                </div>
+                            </li>
+                            <li className="list-group-item" style={{ backgroundColor: 'rgba(255,255,255,0.5)' }}>
+                                <div className="media align-items-center">
+                                    <img src="https://cdn.worldvectorlogo.com/logos/chipotle-1.svg"
+                                        style={{ width: 30, height: 30 }}
+                                        className="d-block rounded-circle" alt=""
+                                        onClick={() => { }} />
+                                    <div className="media-body px-2">
+                                        <a className="text-dark mr-2"><strong>Chipotle</strong></a>
+                                        <span className={"badge badge-dot badge-success"}></span>&nbsp;<span className="text-danger" style={{ fontSize: 20 }}>Queue Time:{this.state.chipotleQueue && Math.floor(this.state.chipotleQueue / 60)}</span>
+                                    </div>
+                                    <a className="d-block text-light text-large font-weight-light" onClick={() => { }}>&times;</a>
+                                </div>
+                            </li>
                             <li className="list-group-item" style={{ backgroundColor: 'rgba(255,255,255,0.5)' }}>
                                 <div className="media align-items-center">
                                     <img src="http://blogs-images.forbes.com/elainewong/files/2011/01/0106_starbucks-logo_400x400.jpg"
@@ -270,51 +319,12 @@ class SerachPage extends React.Component {
                             </li>
                             <li className="list-group-item" style={{ backgroundColor: 'rgba(255,255,255,0.5)' }}>
                                 <div className="media align-items-center">
-                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlMU2wosyQ1wKFKWJQOIbd089wjN_n46ypcaCtRfzZrbI4YKeL"
-                                        style={{ width: 30, height: 30 }}
-                                        className="d-block rounded-circle" alt=""
-                                        onClick={() => { }} />
-                                    <div className="media-body px-2">
-                                        <a className="text-dark mr-2"><strong>Super Duper Buger</strong></a>
-                                        <span className={"badge badge-dot badge-success"}></span>&nbsp;<span className="text-muted"></span>
-                                    </div>
-                                    <a className="d-block text-light text-large font-weight-light" onClick={() => { }}>&times;</a>
-                                </div>
-                            </li>
-                            <li className="list-group-item" style={{ backgroundColor: 'rgba(255,255,255,0.5)' }}>
-                                <div className="media align-items-center">
                                     <img src="http://www.logosvectorfree.com/wp-content/uploads/2018/07/Pizza-Hut-Logo-Vectors.jpg"
                                         style={{ width: 30, height: 30 }}
                                         className="d-block rounded-circle" alt=""
                                         onClick={() => { }} />
                                     <div className="media-body px-2">
                                         <a className="text-dark mr-2"><strong>Pizza Hut</strong></a>
-                                        <span className={"badge badge-dot badge-success"}></span>&nbsp;<span className="text-muted"></span>
-                                    </div>
-                                    <a className="d-block text-light text-large font-weight-light" onClick={() => { }}>&times;</a>
-                                </div>
-                            </li>
-                            <li className="list-group-item" style={{ backgroundColor: 'rgba(255,255,255,0.5)' }}>
-                                <div className="media align-items-center">
-                                    <img src="https://media-cdn.tripadvisor.com/media/photo-s/11/83/01/ee/logo.jpg"
-                                        style={{ width: 30, height: 30 }}
-                                        className="d-block rounded-circle" alt=""
-                                        onClick={() => { }} />
-                                    <div className="media-body px-2">
-                                        <a className="text-dark mr-2"><strong>In n Out</strong></a>
-                                        <span className={"badge badge-dot badge-success"}></span>&nbsp;<span className="text-muted"></span>
-                                    </div>
-                                    <a className="d-block text-light text-large font-weight-light" onClick={() => { }}>&times;</a>
-                                </div>
-                            </li>
-                            <li className="list-group-item" style={{ backgroundColor: 'rgba(255,255,255,0.5)' }}>
-                                <div className="media align-items-center">
-                                    <img src="https://cdn.worldvectorlogo.com/logos/chipotle-1.svg"
-                                        style={{ width: 30, height: 30 }}
-                                        className="d-block rounded-circle" alt=""
-                                        onClick={() => { }} />
-                                    <div className="media-body px-2">
-                                        <a className="text-dark mr-2"><strong>Chipotle</strong></a>
                                         <span className={"badge badge-dot badge-success"}></span>&nbsp;<span className="text-muted"></span>
                                     </div>
                                     <a className="d-block text-light text-large font-weight-light" onClick={() => { }}>&times;</a>

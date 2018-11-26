@@ -84,7 +84,7 @@ class App extends Component {
     return (
       <React.Fragment>
         <div className={styles.root} style={{ backgroundImage: `url(https://wallpapercave.com/wp/HKBJSDe.jpg)`, height: "100vh" }}>
-          <div><small>latitude:{this.state.lat} longitude:{this.state.lng}</small></div>
+          {/* <div><small>latitude:{this.state.lat} longitude:{this.state.lng}</small></div> */}
           <SerachPage />
         </div>
         <MyFancyComponent />
