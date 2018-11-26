@@ -16,8 +16,8 @@ const MapWithADirectionsRenderer = compose(
 
         googleMapURL: "https://maps.googleapis.com/maps/api/js?key=AIzaSyAhwUwsAZK-d7sDJpOmlUbP3ckRzkhqrUc&v=3.exp&libraries=geometry,drawing,places,traffic-model",
         loadingElement: <div style={{ height: `100%` }} />,
-        containerElement: <div style={{ height: `400px` }} />,
-        mapElement: <div style={{ height: `400px` }} />,
+        containerElement: <div style={{ height: `650px` }} />,
+        mapElement: <div style={{ height: `650px` }} />,
     }),
     withScriptjs,
     withGoogleMap,
@@ -49,7 +49,7 @@ const MapWithADirectionsRenderer = compose(
         <TrafficLayer autoUpdate />
 
         {props.directions && <DirectionsRenderer directions={props.directions} />}
-        {props.isMarkerShown && <Marker position={{ lat: 34.052659166666665, lng: -118.25683588573333 }} onClick={props.onMarkerClick} />}
+        {/* {props.isMarkerShown && <Marker position={{ lat: 34.052659166666665, lng: -118.25683588573333 }} onClick={props.onMarkerClick} />}
         {props.isMarkerShown && <Marker position={{ lat: 34.052659178666665, lng: -118.25685583333333 }} onClick={props.onMarkerClick} />}
         {props.isMarkerShown && <Marker position={{ lat: 34.057659165556665, lng: -118.25683583999333 }} onClick={props.onMarkerClick} />}
         {props.isMarkerShown && <Marker position={{ lat: 34.052659166666665, lng: -118.25683583336333 }} onClick={props.onMarkerClick} />}
@@ -60,7 +60,7 @@ const MapWithADirectionsRenderer = compose(
         {props.isMarkerShown && <Marker position={{ lat: 34.052659162365665, lng: -118.25683583333333 }} onClick={props.onMarkerClick} />}
         {props.isMarkerShown && <Marker position={{ lat: 34.052658955566665, lng: -118.25683583333333 }} onClick={props.onMarkerClick} />}
         {props.isMarkerShown && <Marker position={{ lat: 34.052659167899965, lng: -118.12358974888888 }} onClick={props.onMarkerClick} />}
-        {props.isMarkerShown && <Marker position={{ lat: 34.052659166963665, lng: -118.25683583333333 }} onClick={props.onMarkerClick} />}
+        {props.isMarkerShown && <Marker position={{ lat: 34.052659166963665, lng: -118.25683583333333 }} onClick={props.onMarkerClick} />} */}
 
     </GoogleMap>
 );

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import Page2HTML from "./Page2Component"
+import Page2HTML from "./Page2Component";
+import { withRouter } from 'react-router-dom';
 
 const gm = window.gm;
 
@@ -33,7 +34,8 @@ class Page2 extends Component {
     }
 
     handleClose = () => {
-        gm.system.closeApp();
+        // gm.system.closeApp();
+        this.props.history.push('/map');
     };
 
     hi = () => {
@@ -51,4 +53,4 @@ class Page2 extends Component {
     }
 }
 
-export default Page2;
+export default withRouter(Page2);
