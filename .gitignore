@@ -1,0 +1,4 @@
+src/static/
+src/precache*
+package-lock.json
+.DS_Store
