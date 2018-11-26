@@ -42,6 +42,17 @@ class SerachPage extends React.Component {
                     "messageDateTime": "2018-11-25T18:55:46.903"
                 }
             },
+            queueData: {
+                "requestHeader": {
+                    "messageDateTime": "2018-11-26T15:25:55.327",
+                    "requestMessageId": "6da60e1b8b024532a2e0eacb1af58581"
+                },
+                "requestData": {
+                    "kind": "predict"
+                }
+            },
+            superQueue: 0,
+            chipotleQueue: 0,
             results: {
                 address: []
             }
@@ -58,6 +69,7 @@ class SerachPage extends React.Component {
         console.log(window)
         var id = gm.info.getCurrentPosition(this.processPosition, true)
         console.log(id)
+        VisaServices.QueueInsights(this.state.queueData, this.onQueueInsightsSuccess, this.onQueueInsightsError)
         // var connected = gm.networkManager.getNetworkAvailability();
 
         // gm.networkManager.getNetworkAvailability(this.networkManager)
@@ -79,6 +91,13 @@ class SerachPage extends React.Component {
                 lng: lng
             }
         })
+    }
+
+    onQueueInsightsSuccess = response => {
+        console.log("======================", response)
+    }
+    onQueueInsightsError = error => {
+        console.log(error)
     }
     onKeyPress = button => {
         console.log("Button pressed", button);
@@ -251,12 +270,12 @@ class SerachPage extends React.Component {
                             </li>
                             <li className="list-group-item" style={{ backgroundColor: 'rgba(255,255,255,0.5)' }}>
                                 <div className="media align-items-center">
-                                    <img src="https://therockbury.com/wp-content/uploads/2014/03/burgerking-logo.jpg"
+                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlMU2wosyQ1wKFKWJQOIbd089wjN_n46ypcaCtRfzZrbI4YKeL"
                                         style={{ width: 30, height: 30 }}
                                         className="d-block rounded-circle" alt=""
                                         onClick={() => { }} />
                                     <div className="media-body px-2">
-                                        <a className="text-dark mr-2"><strong>Buger King</strong></a>
+                                        <a className="text-dark mr-2"><strong>Super Duper Buger</strong></a>
                                         <span className={"badge badge-dot badge-success"}></span>&nbsp;<span className="text-muted"></span>
                                     </div>
                                     <a className="d-block text-light text-large font-weight-light" onClick={() => { }}>&times;</a>
