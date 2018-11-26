@@ -85,21 +85,12 @@ class App extends Component {
     console.log(gm)
     console.log(this.props.location);
     return (
-      // <div className={styles.root} style={{ backgroundImage: `url(https://wallpapercave.com/wp/HKBJSDe.jpg)`, height: "100vh" }}>
-      <>
-        <div><small>latitude:{this.state.lat} longitude:{this.state.lng}</small></div>
-        <Navigation />
-      </>
-      // </div>
-
-      // {/* <h1 onClick={() => this.props.history.push('/page2')}>Click me if you dare</h1> */ }
-      // <React.Fragment>
-      //   <div className={styles.root} style={{ backgroundImage: `url(https://wallpapercave.com/wp/HKBJSDe.jpg)`, height: "100vh" }}>
-      //     <div><small>latitude:{this.state.lat} longitude:{this.state.lng}</small></div>
-      //     <SerachPage />
-      //   </div>
-      //   <MyFancyComponent />
-      // </React.Fragment>
+      <React.Fragment>
+        <div>
+          {/* <div><small>latitude:{this.state.lat} longitude:{this.state.lng}</small></div> */}
+          <Navigation />
+        </div>
+      </React.Fragment>
     );
   }
 }
