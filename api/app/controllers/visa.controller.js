@@ -13,6 +13,12 @@ class VisaController {
       res.json(JSON.parse(result).merchantLocatorServiceResponse);
     })
   }
+
+  static queueInsights(req, res) {
+    visaService.queueInsights(req.body, result => {
+      res.json(JSON.parse(result));
+    });
+  }
 }
 
 module.exports = VisaController;
